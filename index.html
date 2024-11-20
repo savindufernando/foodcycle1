@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Cycle</title>
+    <link rel="stylesheet" type="text/css" href="panel/css/style.css'">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" /> 
+
+</head>
+
+<body>
+
+    
+    <!-- Header Section -->
+<header class="relative z-10 w-full"> 
+    <div class="flex items-center justify-between w-full px-6 mx-auto bg-white backdrop-blur-md">
+        <!-- Logo and Branding -->
+        <div class="flex items-center space-x-3">
+            <img src="panel/image/logo.png" alt="Food Cycle Logo" class="w-24 h-auto">
+        </div>
+
+        <!-- Navigation -->
+        <nav class="relative hidden space-x-6 md:flex">
+            <a href="index.html" class="font-semibold text-green-600 hover:text-green-800">Home</a>
+            <a href="shop.html" class="font-semibold text-black hover:text-green-800">Shop</a>
+            <div class="relative dropdown">
+                <button id="dropdown-button" class="text-black hover:text-green-800 focus:outline-none" aria-expanded="false">
+                    <a href="#" class="font-semibold text-black hover:text-green-800 ">Donation</a>
+                </button>
+                 <div id="dropdown-menu" class="absolute right-0 hidden w-48 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" aria-labelledby="dropdown-button">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Food Donation</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Money Donation</a>
+                </div> 
+            </div>
+            <a href="" class="font-semibold text-black hover:text-green-800">Services</a>
+            <a href="#" class="font-semibold text-black hover:text-green-800">Contact Us</a>
+        </nav>
+
+        <!-- Seller Button and Icons -->
+        <div class="flex items-center space-x-4">
+                       
+            <a href="" class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600">Seller</a>
+            
+            <div class="relative items-center hidden space-x-4 md:flex navIcon">
+                <a href="#"><i class="fas fa-bell hover:text-green-800"></i></a>
+                <a href=""><i class="fas fa-shopping-cart hover:text-green-800"></i></a>
+                <div class="relative dropdown">
+                    <button id="dropdown-nav" class="text-black hover:text-green-800 focus:outline-none" aria-expanded="false">
+                        <i class="fa-regular fa-circle-user fa-lg"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu for User Profile -->
+                    <div id="dropdown-menu1" class="absolute right-0 hidden w-48 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-nav">
+                    
+                            <!-- If the user is authenticated, show their name and sign out option -->
+                            <span class="block px-4 py-2 font-serif text-lg text-red-500">Hi, </span>
+                            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                            
+                                <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" type="submit">Logout</button>
+                            </form>
+                        
+                            <!-- If the user is not authenticated, show login and guest info -->
+                            <span class="block px-4 py-2 font-serif text-lg text-red-500">Hi, Guest</span>
+                            <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Login</a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center md:hidden">
+                <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>    
+        </div>
+    </div>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div id="mobileMenu" class="hidden p-4 bg-gray-100 md:hidden">
+        <a href="index.html" class="block py-2 text-black">Home</a>
+        <a href="shop.html" class="block py-2 text-black">Shop</a>
+        <a href="#" class="block py-2 text-black">Donation</a>
+        <a href="service.html" class="block py-2 text-black">Services</a>
+        <a href="#" class="block py-2 text-black">Contact Us</a>
+    </div>
+</header>
+
+
+    <!-- Main Section -->
+    <section class="relative items-center bg-no-repeat bg-cover h-[30rem]" style="background-image: url('panel/image/banner.jpg')">
+        <div class="flex items-center justify-start pl-6 h-5/6 lg:pl-28">
+            <div class="text-left text-black">
+                <h1 class="mb-1 text-xl font-bold">Reduce Food Waste,</h1>
+                <h2 class="mb-12 text-4xl font-bold">Buy Fresh Leftovers at Great Prices</h2>
+                <a href="#" class="px-6 py-3 text-white bg-green-500 rounded hover:bg-green-600">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="mx-auto text-center space">
+            <h3 class="mb-2 text-xl italic text-green-600">Featured Categories</h3>
+            <h2 class="mb-8 text-4xl font-bold">Sells Products</h2>
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                <!-- Human Donations -->
+                <button>
+                    <div class="flex flex-col items-center">
+                        <div class="p-2 bg-yellow-200 rounded-full">
+                            <div class="p-8 bg-yellow-200 border-2 border-yellow-500 rounded-full">
+                                <i class="text-4xl text-slate-700 fas fa-utensils"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">Human Donations</h4>
+                    </div>
+                </button>
+
+                <!-- Animal Feed -->
+                <button>
+                    <div class="flex flex-col items-center">
+                        <div class="p-2 bg-green-400 rounded-full">
+                            <div class="p-8 bg-green-400 border-2 border-green-600 rounded-full">
+                                <i class="text-4xl text-slate-700 fas fa-paw"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">Animal Feed</h4>
+                    </div>
+                </button>
+                
+                <!-- Fertilizer -->
+                <button>
+                    <div class="flex flex-col items-center">
+                        <div class="p-2 rounded-full bg-stone-300">
+                            <div class="p-8 border-2 rounded-full border-stone-400 bg-stone-300">
+                                <i class="text-4xl text-slate-700 fas fa-seedling"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">Fertilizer</h4>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Vision and Mission Section -->
+    <section class="bg-[#c5d7b6] p-12 mx-auto">
+        <div class="grid  grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-14">
+        
+            <!-- Vision Section -->
+            <div class="md:text-left md:pr-4">
+                <h2 class="mb-2 text-2xl font-semibold text-center">Our Vision</h2>
+                <p class="text-lg leading-relaxed text-center text-gray-800 " style="text-align: justify;">
+                    "To create a sustainable future where no vegetable is wasted, transforming leftovers into valuable resources for people, animals, and the planet."
+                </p>
+            </div>
+    
+            <div class="items-center justify-center hidden md:flex">
+                <div class="w-px h-40 bg-gray-500"></div>
+            </div>
+    
+            <!-- Mission Section -->
+            <div class="md:text-left md:pl-4">
+                <h2 class="mb-2 text-2xl font-semibold text-center">Our Mission</h2>
+                <p class="leading-relaxed text-gray-800 xt-center t ext-lg md:pr-10" style="text-align: justify;">
+                    "Our mission is to reduce vegetable waste by connecting surplus produce to consumers, farmers, and eco-conscious communities. We aim to repurpose leftovers for human consumption, animal feed, and natural fertilizers, fostering a circular economy that benefits both people and the environment."
+                </p>
+            </div>
+        
+        </div>
+    </section>
+    
+    <!-- About Us Section -->
+    <section class="py-16 ">
+        <div class="grid items-center grid-cols-1 gap-8 mx-auto max-w-7xl md:grid-cols-2">
+            <div class="p-4">
+                <img src="panel/image/market.jpg" alt="About Us Image" class="w-full h-auto rounded-lg shadow-lg">
+            </div>
+            
+            <div class="p-8">
+                <h2 class="mb-4 text-3xl font-bold text-gray-800">About Us</h2>
+                <p class="mb-4 text-lg text-gray-600">
+                By repurposing vegetables that would otherwise be discarded, we offer a sustainable solution that benefits everyone. Whether it's perfectly good produce for human consumption, nutritional feed for animals, or organic waste for creating natural fertilizers, we ensure that every vegetable finds its purpose.
+                </p>
+                <p class="text-lg text-gray-600">
+                Our platform connects local farmers, businesses, and consumers to help reduce food waste while fostering a greener, more sustainable future.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="w-full mx-auto text-center"> 
+        <div class="flex items-center justify-center mb-8">
+            <div class="flex-grow h-1 bg-red-500"></div>
+            <h2 class="px-4 text-2xl font-semibold">Partners</h2>
+            <div class="flex-grow h-1 bg-red-500"></div>
+        </div>
+        
+        <!-- Partner logos -->
+        <div class="flex items-center justify-center space-x-56">
+            <div class="w-40">
+                <img src="panel/image/Partner1.jpeg" alt="Finlays Logo" class="mx-auto mb-4"> 
+            </div>
+            <div class="w-36">
+                <img src="panel/image/Partner2.jpeg" alt="Logicare Logo" class="mx-auto mb-4"> 
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-10 text-center bg-slate-100">
+        <h2 class="mb-8 text-2xl font-semibold text-green-600">Contact Us</h2>
+        <div class="grid max-w-4xl grid-cols-1 mx-auto gap-9 sm:grid-cols-2">
+            <!-- Address Box 1 -->
+            <div class="p-6 bg-white rounded-lg shadow">
+                <div class="flex items-center mb-4">
+                    <i class="text-2xl text-green-600 fas fa-map-marker-alt"></i>
+                    <h3 class="ml-4 text-lg font-bold">Address</h3>
+                </div>
+                <p>77/1, Liberty nest road, Kothalawala, Kaduwela</p>
+            </div>
+            <!-- Mail Box -->
+            <div class="p-6 bg-white rounded-lg shadow">
+                <div class="flex items-center mb-4">
+                    <i class="text-2xl text-green-600 fas fa-envelope"></i>
+                    <h3 class="ml-4 text-lg font-bold">Mail</h3>
+                </div>
+                <p><a href="mailto:hello@saaraketha.com" class="text-blue-500">hello@saaraketha.com</a></p>
+            </div>
+            <!-- Phone Number Box -->
+            <div class="p-6 bg-white rounded-lg shadow">
+                <div class="flex items-center mb-4">
+                    <i class="text-2xl text-green-600 fas fa-phone-alt"></i>
+                    <h3 class="ml-4 text-lg font-bold">Phone Number</h3>
+                </div>
+                <p>+94-7623680 / +94 761234560</p>
+            </div>
+            <!-- Address Box 2 -->
+            <div class="p-6 bg-white rounded-lg shadow">
+                <div class="flex items-center mb-4">
+                    <i class="text-2xl text-green-600 fas fa-map-marker-alt"></i>
+                    <h3 class="ml-4 text-lg font-bold">Address</h3>
+                </div>
+                <p>77/1, Liberty nest road, Kothalawala, Kaduwela</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+     <!-- Footer -->
+ <footer class="py-10 text-gray-300 bg-gray-700 rounded-t-3xl">
+    <div class="container flex flex-col justify-between px-4 mx-auto md:flex-row md:px-10">
+        <!-- Social Media Section -->
+        <div class="mb-8 md:mb-0">
+            <h3 class="mb-4 text-lg font-semibold text-white">SOCIAL MEDIA</h3>
+            <ul>
+                <li class="flex items-center mb-2">
+                    <i class="mr-2 text-white fab fa-facebook"></i>
+                    <a href="#" class="hover:text-white">Foot Cycle</a>
+                </li>
+                <li class="flex items-center mb-2">
+                    <i class="mr-2 text-white fab fa-whatsapp"></i>
+                    <a href="tel:+9476453400" class="hover:text-white">+94 76453400</a>
+                </li>
+                <li class="flex items-center mb-2">
+                    <i class="mr-2 text-white fab fa-instagram"></i>
+                    <a href="#" class="hover:text-white">Foot_Cycle</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Links Section -->
+        <div class="mb-8 md:mb-0">
+            <h3 class="mb-4 text-lg font-semibold text-white">LINKS</h3>
+            <ul>
+                <li><a href="#" class="hover:text-white">Home</a></li>
+                <li><a href="#" class="hover:text-white">Shop</a></li>
+                <li><a href="#" class="hover:text-white">Donation</a></li>
+                <li><a href="#" class="hover:text-white">Seller</a></li>
+            </ul>
+        </div>
+
+        <!-- Services Section -->
+        <div class="mb-8 md:mb-0">
+            <h3 class="mb-4 text-lg font-semibold text-white">SERVICES</h3>
+            <ul>
+                <li><a href="#" class="hover:text-white">Storage</a></li>
+                <li><a href="#" class="hover:text-white">Delivery</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div class="w-full md:w-1/3">
+            <form class="flex flex-col">
+                <input type="email" placeholder="Email Address" class="p-2 mb-4 text-gray-700 placeholder-gray-600 bg-gray-300 rounded">
+                <textarea placeholder="Message" class="p-2 mb-4 text-gray-700 placeholder-gray-600 bg-gray-300 rounded"></textarea>
+                <button class="self-end py-2 text-white bg-green-500 rounded w-36 hover:bg-green-600">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Bottom Text -->
+    <div class="pt-4 mt-10 text-center text-gray-500 border-t-2 border-white">
+        © 2024, Food Cycle
+    </div>
+</footer>
+
+<script src="panel/js/script.js"></script>
+
+
+
+
+</body>
+</html>
+

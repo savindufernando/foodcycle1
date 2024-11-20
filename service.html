@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Cycle - Services</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="panel/css/style.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+
+<body class="text-gray-800 bg-gray-100">
+
+
+<!-- Header Section -->
+<header class="relative z-10 w-full"> 
+    <div class="flex items-center justify-between w-full px-6 mx-auto bg-white backdrop-blur-md">
+        <!-- Logo and Branding -->
+        <div class="flex items-center space-x-3">
+            <img src="panel/image/logo.png" alt="Food Cycle Logo" class="w-24 h-auto">
+        </div>
+
+        <!-- Navigation -->
+        <nav class="relative hidden space-x-6 md:flex">
+            <a href="index.html" class="font-semibold text-green-600 hover:text-green-800">Home</a>
+            <a href="shop.html" class="font-semibold text-black hover:text-green-800">Shop</a>
+            <div class="relative dropdown">
+                <button id="dropdown-button" class="text-black hover:text-green-800 focus:outline-none" aria-expanded="false">
+                    <a href="#" class="font-semibold text-black hover:text-green-800 ">Donation</a>
+                </button>
+                 <div id="dropdown-menu" class="absolute right-0 hidden w-48 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" aria-labelledby="dropdown-button">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Food Donation</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Money Donation</a>
+                </div> 
+            </div>
+            <a href="" class="font-semibold text-black hover:text-green-800">Services</a>
+            <a href="#" class="font-semibold text-black hover:text-green-800">Contact Us</a>
+        </nav>
+
+        <!-- Seller Button and Icons -->
+        <div class="flex items-center space-x-4">
+                       
+            <a href="" class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600">Seller</a>
+            
+            <div class="relative items-center hidden space-x-4 md:flex navIcon">
+                <a href="#"><i class="fas fa-bell hover:text-green-800"></i></a>
+                <a href=""><i class="fas fa-shopping-cart hover:text-green-800"></i></a>
+                <div class="relative dropdown">
+                    <button id="dropdown-nav" class="text-black hover:text-green-800 focus:outline-none" aria-expanded="false">
+                        <i class="fa-regular fa-circle-user fa-lg"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu for User Profile -->
+                    <div id="dropdown-menu1" class="absolute right-0 hidden w-48 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-nav">
+                    
+                            <!-- If the user is authenticated, show their name and sign out option -->
+                            <span class="block px-4 py-2 font-serif text-lg text-red-500">Hi, </span>
+                            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                            
+                                <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" type="submit">Logout</button>
+                            </form>
+                        
+                            <!-- If the user is not authenticated, show login and guest info -->
+                            <span class="block px-4 py-2 font-serif text-lg text-red-500">Hi, Guest</span>
+                            <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Login</a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center md:hidden">
+                <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>    
+        </div>
+    </div>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div id="mobileMenu" class="hidden p-4 bg-gray-100 md:hidden">
+        <a href="index.html" class="block py-2 text-black">Home</a>
+        <a href="shop.html" class="block py-2 text-black">Shop</a>
+        <a href="#" class="block py-2 text-black">Donation</a>
+        <a href="service.html" class="block py-2 text-black">Services</a>
+        <a href="#" class="block py-2 text-black">Contact Us</a>
+    </div>
+</header>
+
+  <!-- Hero Section -->
+  <section class="relative text-white bg-green-500">
+    <div class="flex flex-col items-center px-6 py-16 mx-auto text-center max-w-7xl">
+      <h1 class="mb-4 text-4xl font-bold">Reducing Food Waste, One Connection at a Time</h1>
+      <p class="max-w-2xl mb-6 text-lg">
+        Join us in creating a sustainable world where no edible food is wasted. Be a part of the movement to connect markets, transport providers, and storage facilities for a meaningful impact.
+      </p>
+      <a href="#get-involved" class="px-6 py-3 text-green-600 transition bg-white rounded-lg shadow-md hover:bg-gray-100">
+        Get Involved
+      </a>
+    </div>
+    
+  </section>
+
+  <!-- Main Content -->
+  <main class="py-12">
+    <div class="px-6 mx-auto max-w-7xl">
+      <!-- Who We Are Section -->
+      <div class="grid items-center gap-8 mb-16 lg:grid-cols-2">
+        <div>
+          <h2 class="mb-4 text-3xl font-bold text-gray-800">Who We Are</h2>
+          <p class="text-gray-700">
+            We are a community-driven initiative committed to reducing food waste by connecting markets with surplus food
+            to those who can transport and store it efficiently. By creating a platform that bridges the gap, we aim to
+            ensure that perfectly good food doesn’t go to waste and reaches those in need.
+          </p>
+        </div>
+        <div>
+            <img src="panel/image/ServiceBanner.jpg" alt="Who We Are" class="rounded-lg shadow-md">
+        </div>
+      </div>
+
+      <!-- Vision and Mission Section -->
+      <div class="grid gap-8 lg:grid-cols-2">
+        <!-- Vision -->
+        <div class="p-6 bg-white rounded-lg shadow-md">
+          <h3 class="mb-4 text-xl font-semibold text-gray-800">Our Vision</h3>
+          <p class="text-gray-700">
+            Our vision is a sustainable world where no edible food is wasted. We strive to bring markets, transport
+            providers, storage facilities, and charities together under one roof to create a meaningful impact.
+          </p>
+        </div>
+
+        <!-- Mission -->
+        <div class="p-6 bg-white rounded-lg shadow-md">
+          <h3 class="mb-4 text-xl font-semibold text-gray-800">Our Mission</h3>
+          <ul class="space-y-2 text-gray-700 list-disc list-inside">
+            <li>Minimize Food Waste: Provide a simple solution for markets to list excess food supplies.</li>
+            <li>Empower Collaboration: Connect businesses and individuals with transport and storage solutions.</li>
+            <li>Support Communities: Channel unused food to those who need it the most.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Get Involved Section -->
+      <section id="get-involved" class="mt-16">
+        <h2 class="mb-8 text-3xl font-bold text-center text-gray-800">Get Involved</h2>
+        <div class="grid gap-8 lg:grid-cols-2">
+          <!-- Transport Provider -->
+          <div class="p-6 bg-white rounded-lg shadow-md">
+            <h3 class="mb-4 text-xl font-semibold text-gray-800">Be a Transport Provider</h3>
+            <p class="mb-4 text-gray-700">
+              If you own or manage a transportation service, you can play a crucial role in this mission:
+            </p>
+            <ul class="space-y-2 text-gray-700 list-disc list-inside">
+              <li>View and accept transport requests from local markets.</li>
+              <li>Help deliver food to storage facilities or charities.</li>
+              <li>Support a cause while growing your business network.</li>
+            </ul>
+            <a href="{{ route('service.delivery') }}" class="inline-block px-4 py-2 mt-4 text-white transition bg-green-500 rounded-lg hover:bg-green-600">
+              Join as Transport Provider
+            </a>
+          </div>
+
+          <!-- Storage Provider -->
+          <div class="p-6 bg-white rounded-lg shadow-md">
+            <h3 class="mb-4 text-xl font-semibold text-gray-800">Be a Storage Provider</h3>
+            <p class="mb-4 text-gray-700">
+              Do you have extra storage space? Join us to:
+            </p>
+            <ul class="space-y-2 text-gray-700 list-disc list-inside">
+              <li>Offer refrigerated or dry storage for excess food.</li>
+              <li>Collaborate with markets and transport providers.</li>
+              <li>Reduce waste while optimizing your facility's usage.</li>
+            </ul>
+            <a href="{{ route('service.storage') }}" class="inline-block px-4 py-2 mt-4 text-white transition bg-green-500 rounded-lg hover:bg-green-600">
+              Join as Storage Provider
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+      <!-- Footer Section -->
+     <!-- Footer -->
+ <footer class="py-10 text-gray-300 bg-gray-700 rounded-t-3xl">
+  <div class="container flex flex-col justify-between px-4 mx-auto md:flex-row md:px-10">
+      <!-- Social Media Section -->
+      <div class="mb-8 md:mb-0">
+          <h3 class="mb-4 text-lg font-semibold text-white">SOCIAL MEDIA</h3>
+          <ul>
+              <li class="flex items-center mb-2">
+                  <i class="mr-2 text-white fab fa-facebook"></i>
+                  <a href="#" class="hover:text-white">Foot Cycle</a>
+              </li>
+              <li class="flex items-center mb-2">
+                  <i class="mr-2 text-white fab fa-whatsapp"></i>
+                  <a href="tel:+9476453400" class="hover:text-white">+94 76453400</a>
+              </li>
+              <li class="flex items-center mb-2">
+                  <i class="mr-2 text-white fab fa-instagram"></i>
+                  <a href="#" class="hover:text-white">Foot_Cycle</a>
+              </li>
+          </ul>
+      </div>
+
+      <!-- Links Section -->
+      <div class="mb-8 md:mb-0">
+          <h3 class="mb-4 text-lg font-semibold text-white">LINKS</h3>
+          <ul>
+              <li><a href="#" class="hover:text-white">Home</a></li>
+              <li><a href="#" class="hover:text-white">Shop</a></li>
+              <li><a href="#" class="hover:text-white">Donation</a></li>
+              <li><a href="#" class="hover:text-white">Seller</a></li>
+          </ul>
+      </div>
+
+      <!-- Services Section -->
+      <div class="mb-8 md:mb-0">
+          <h3 class="mb-4 text-lg font-semibold text-white">SERVICES</h3>
+          <ul>
+              <li><a href="#" class="hover:text-white">Storage</a></li>
+              <li><a href="#" class="hover:text-white">Delivery</a></li>
+          </ul>
+      </div>
+
+      <!-- Contact Form Section -->
+      <div class="w-full md:w-1/3">
+          <form class="flex flex-col">
+              <input type="email" placeholder="Email Address" class="p-2 mb-4 text-gray-700 placeholder-gray-600 bg-gray-300 rounded">
+              <textarea placeholder="Message" class="p-2 mb-4 text-gray-700 placeholder-gray-600 bg-gray-300 rounded"></textarea>
+              <button class="self-end py-2 text-white bg-green-500 rounded w-36 hover:bg-green-600">Submit</button>
+          </form>
+      </div>
+  </div>
+
+  <!-- Footer Bottom Text -->
+  <div class="pt-4 mt-10 text-center text-gray-500 border-t-2 border-white">
+      © 2024, Food Cycle
+  </div>
+
+  <script src="panel/js/script.js"></script>
+</footer>
+  
+</body>
+</html>

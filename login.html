@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fresh Cycle</title>
+        
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="panel/css/style.css'">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" /> 
+</head>
+<body class="overflow-hidden">
+        <!-- Header Section -->
+        <header class="relative z-10 w-full"> 
+            <div class="flex items-center justify-between w-full px-6 mx-auto bg-white backdrop-blur-md">
+                <!-- Logo and Branding -->
+                <div class="flex items-center space-x-3">
+                    <img src="panel/image/logo.png" alt="Food Cycle Logo" class="w-24 h-auto">
+                </div>
+        
+                <!-- Navigation -->
+                <nav class="relative hidden space-x-6 md:flex">
+                    <a href="index.html" class="font-semibold text-green-600 hover:text-green-800">Home</a>
+                    <a href="shop.html" class="font-semibold text-black hover:text-green-800">Shop</a>
+                    <div class="relative dropdown">
+                        <button id="dropdown-button" class="text-black hover:text-green-800 focus:outline-none" aria-expanded="false">
+                            <a href="#" class="font-semibold text-black hover:text-green-800 ">Donation</a>
+                        </button>
+                         <div id="dropdown-menu" class="absolute right-0 hidden w-48 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" aria-labelledby="dropdown-button">
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Food Donation</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Money Donation</a>
+                        </div> 
+                    </div>
+                    <a href="" class="font-semibold text-black hover:text-green-800">Services</a>
+                    <a href="#" class="font-semibold text-black hover:text-green-800">Contact Us</a>
+                </nav>
+        
+                <!-- Seller Button and Icons -->
+                <div class="flex items-center space-x-4">
+                               
+                    <a href="" class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600">Seller</a>
+                    
+                    <div class="relative items-center hidden space-x-4 md:flex navIcon">
+                        <a href="#"><i class="fas fa-bell hover:text-green-800"></i></a>
+                        <a href=""><i class="fas fa-shopping-cart hover:text-green-800"></i></a>
+                        <div class="relative dropdown">
+                            <button id="dropdown-nav" class="text-black hover:text-green-800 focus:outline-none" aria-expanded="false">
+                                <i class="fa-regular fa-circle-user fa-lg"></i>
+                            </button>
+                            
+                            <!-- Dropdown Menu for User Profile -->
+                            <div id="dropdown-menu1" class="absolute right-0 hidden w-48 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-nav">
+                            
+                                    <!-- If the user is authenticated, show their name and sign out option -->
+                                    <span class="block px-4 py-2 font-serif text-lg text-red-500">Hi, </span>
+                                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                    
+                                        <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" type="submit">Logout</button>
+                                    </form>
+                                
+                                    <!-- If the user is not authenticated, show login and guest info -->
+                                    <span class="block px-4 py-2 font-serif text-lg text-red-500">Hi, Guest</span>
+                                    <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Login</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center md:hidden">
+                        <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600" onclick="toggleMobileMenu()">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>    
+                </div>
+            </div>
+        
+            <!-- Mobile Menu (hidden by default) -->
+            <div id="mobileMenu" class="hidden p-4 bg-gray-100 md:hidden">
+                <a href="index.html" class="block py-2 text-black">Home</a>
+                <a href="shop.html" class="block py-2 text-black">Shop</a>
+                <a href="#" class="block py-2 text-black">Donation</a>
+                <a href="/service" class="block py-2 text-black">Services</a>
+                <a href="#" class="block py-2 text-black">Contact Us</a>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <section class="flex items-center justify-center h-screen bg-center bg-cover" style="background-image: url('panel/image/login.png');">
+                <div class="absolute inset-0 bg-black/60"></div>
+                
+                <!-- Main content with form and image -->
+                <div class="relative z-10 flex flex-col w-full max-w-4xl mb-16 overflow-hidden bg-white rounded-lg shadow-lg md:flex-row bg-opacity-80 backdrop">
+                        <!-- Left side - Login form -->
+                        <div class="w-full p-8 md:w-1/2">
+                                <h2 class="mb-4 text-3xl font-bold">WELCOME BACK!</h2>
+                                <p class="mb-6 text-gray-600">Don't have an account? <a class="text-blue-500" href="{{ route('register') }}">
+                                   
+                                </a></p>
+
+                                <x-auth-session-status class="mb-4" :status="session('status')" />
+                                
+                                <!-- Form -->
+                                <form method="POST" action="{{ route('login') }}">
+                                    
+
+                                        <!-- Email Address -->
+                                        <div class="mb-4">
+                                                <label for="email" :value="__('Email')" class="block text-gray-700" >
+                                                <input id="email" class="w-full p-3 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Username Or Email" >
+                                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                        </div>
+
+                                        <!-- Password -->
+                                        <div class="mb-4">
+                                                <label for="password" :value="__('Password')" class="block text-gray-700">
+                                                <input id="password" class="w-full p-3 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                        type="password"
+                                                        name="password"
+                                                        required autocomplete="current-password" placeholder="Password">
+                                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                        </div>
+
+                                        <!-- Remember Me -->
+                                        <div class="flex items-center justify-between mb-4">
+                                                <label for="remember_me" class="flex items-center">
+                                                        <input id="remember_me" type="checkbox" class="text-blue-500 form-checkbox" name="remember">
+                                                        <span class="ml-2 text-gray-600">Remember me</span>
+                                                </label>
+                                               
+                                                        <a class="text-gray-500 hover:underline" href="{{ route('password.request') }}">
+                                                                Forgot your password?
+                                                        </a>
+                                                
+                                        </div>
+
+                                        <!-- Login Button -->
+                                        <button type="submit" class="w-full py-3 font-bold text-white transition duration-300 bg-blue-600 rounded-lg hover:bg-blue-700">
+                                                Log in
+                                        </button>
+                                </form>
+                        </div>
+
+                        <!-- Right side - Background image -->
+                        <div class="hidden w-0 rounded-lg md:block md:w-1/2">
+                                <img src="panel/image/login.png" alt="Field Image" class="object-cover w-full h-full rounded-r-lg">
+                        </div> 
+                </div>
+        </section>
+
+        <!-- Custom JS -->
+        <script src="panel/js/script.js"></script>
+</body>
+</html>
+
+

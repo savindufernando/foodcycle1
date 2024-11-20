@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Cycle - Marketplace</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('panel/css/style.css') }}">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+
+<body class="text-gray-800 bg-gray-100">
+
+    <!-- Header Section -->
+        <!-- Header Section -->
+<header class="relative z-10 w-full"> 
+    <div class="flex items-center justify-between w-full px-6 mx-auto bg-white backdrop-blur-md">
+        <!-- Logo and Branding -->
+        <div class="flex items-center space-x-3">
+            <img src="panel/image/logo.png" alt="Food Cycle Logo" class="w-24 h-auto">
+        </div>
+
+        <!-- Navigation -->
+        <nav class="relative hidden space-x-6 md:flex">
+            <a href="index.html" class="font-semibold text-green-600 hover:text-green-800">Home</a>
+            <a href="shop.html" class="font-semibold text-black hover:text-green-800">Shop</a>
+            <div class="relative dropdown">
+                <button id="dropdown-button" class="text-black hover:text-green-800 focus:outline-none" aria-expanded="false">
+                    <a href="#" class="font-semibold text-black hover:text-green-800 ">Donation</a>
+                </button>
+                 <div id="dropdown-menu" class="absolute right-0 hidden w-48 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" aria-labelledby="dropdown-button">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Food Donation</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Money Donation</a>
+                </div> 
+            </div>
+            <a href="" class="font-semibold text-black hover:text-green-800">Services</a>
+            <a href="#" class="font-semibold text-black hover:text-green-800">Contact Us</a>
+        </nav>
+
+        <!-- Seller Button and Icons -->
+        <div class="flex items-center space-x-4">
+                       
+            <a href="" class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600">Seller</a>
+            
+            <div class="relative items-center hidden space-x-4 md:flex navIcon">
+                <a href="#"><i class="fas fa-bell hover:text-green-800"></i></a>
+                <a href=""><i class="fas fa-shopping-cart hover:text-green-800"></i></a>
+                <div class="relative dropdown">
+                    <button id="dropdown-nav" class="text-black hover:text-green-800 focus:outline-none" aria-expanded="false">
+                        <i class="fa-regular fa-circle-user fa-lg"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu for User Profile -->
+                    <div id="dropdown-menu1" class="absolute right-0 hidden w-48 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-nav">
+                    
+                            <!-- If the user is authenticated, show their name and sign out option -->
+                            <span class="block px-4 py-2 font-serif text-lg text-red-500">Hi, </span>
+                            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                            
+                                <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" type="submit">Logout</button>
+                            </form>
+                        
+                            <!-- If the user is not authenticated, show login and guest info -->
+                            <span class="block px-4 py-2 font-serif text-lg text-red-500">Hi, Guest</span>
+                            <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Login</a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center md:hidden">
+                <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>    
+        </div>
+    </div>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div id="mobileMenu" class="hidden p-4 bg-gray-100 md:hidden">
+        <a href="index.html" class="block py-2 text-black">Home</a>
+        <a href="shop.html" class="block py-2 text-black">Shop</a>
+        <a href="#" class="block py-2 text-black">Donation</a>
+        <a href="service.html" class="block py-2 text-black">Services</a>
+        <a href="#" class="block py-2 text-black">Contact Us</a>
+    </div>
+</header>
+
+    <!-- Hero/Banner Section -->
+    <section class="relative bg-gradient-to-r from-teal-500 to-lime-400 h-[200px] flex items-center justify-center text-white">
+        <h1 class="text-4xl font-extrabold drop-shadow-md">Welcome to Food Cycle Marketplace</h1>
+        <div class="absolute text-sm bottom-4 right-4">Find fresh and organic products easily</div>
+    </section>
+    
+    <!-- Filter & Search Section -->
+    <section class="flex flex-col items-center p-6 mx-4 space-y-6 -translate-y-8 bg-white rounded-md shadow-lg md:flex-row md:justify-between md:space-y-0">
+        <!-- Filter Button -->
+        <button onclick="toggleSidebar()" class="px-6 py-2 text-sm text-white bg-green-600 rounded-lg shadow-md hover:bg-green-700">
+            <i class="fa-solid fa-filter"></i> Filters
+        </button>
+
+        <!-- Search Bar -->
+        <div class="relative flex items-center w-full max-w-lg mx-4">
+            <form method="GET" action="{{ route('shop.index') }}" class="flex w-full">
+                <!-- Input Field -->
+                <input 
+                    type="text" 
+                    name="search" 
+                    value="search" 
+                    placeholder="Search for products..." 
+                    class="w-full py-3 pl-4 pr-12 text-sm border rounded-full shadow-sm focus:ring-2 focus:ring-green-500"
+                >
+                <!-- Search Button -->
+                <button 
+                    type="submit" 
+                    class="absolute inset-y-0 flex items-center text-gray-400 right-3 hover:text-green-500"
+                >
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Sort Dropdown -->
+        <form method="GET" action="{{ route('shop.index') }}" class="inline">
+            <input type="hidden" name="search" value="search">
+            <select 
+                name="sort" 
+                onchange="this.form.submit()" 
+                class="px-6 py-3 text-sm bg-white border rounded-lg shadow-md focus:ring-2 focus:ring-green-500"
+            >
+                <option value="" >Sort by Price</option>
+                <option value="low-high" >Low to High</option>
+                <option value="high-low">High to Low</option>
+            </select>
+        </form>
+    </section>
+
+    <section class="relative flex flex-col mx-4 mb-6 space-y-6 md:flex-row md:space-y-0 md:space-x-6">
+        <!-- Sidebar Filters -->
+        <aside id="filter-sidebar" class="w-full p-4 bg-white rounded-lg shadow-md md:w-1/6">
+            <h2 class="pb-2 mb-4 text-xl font-bold border-b">Filters</h2>
+            <form method="GET" action="{{ route('shop.index') }}">
+                <div class="space-y-4">
+                    <!-- For Humans -->
+                    <div>
+                        <button type="button" onclick="toggleDropdown('human')" class="flex justify-between w-full p-2 text-sm bg-green-100 rounded-md hover:bg-green-200">
+                            For Humans <span id="human-arrow" class="text-gray-600">▼</span>
+                        </button>
+                        <div id="human-dropdown" class="hidden mt-2 ml-4 space-y-2">
+                            <label class="block">
+                                <input 
+                                    type="checkbox" 
+                                    name="filter[]" 
+                                    value="human" 
+                                    class="mr-2" 
+                                    >
+                                Human Food
+                            </label>
+                        </div>
+                    </div>
+    
+                    <!-- For Animals -->
+                    <div>
+                        <button type="button" onclick="toggleDropdown('animals')" class="flex justify-between w-full p-2 text-sm bg-green-100 rounded-md hover:bg-green-200">
+                            For Animals <span id="animals-arrow" class="text-gray-600">▼</span>
+                        </button>
+                        <div id="animals-dropdown" class="hidden mt-2 ml-4 space-y-2">
+                            <label class="block">
+                                <input 
+                                    type="checkbox" 
+                                    name="filter[]" 
+                                    value="animal" 
+                                    class="mr-2" 
+                                 >
+                                Animal Feed
+                            </label>
+                        </div>
+                    </div>
+    
+                    <!-- Fertilizer -->
+                    <div>
+                        <button type="button" onclick="toggleDropdown('fertilizer')" class="flex justify-between w-full p-2 text-sm bg-green-100 rounded-md hover:bg-green-200">
+                            Fertilizer <span id="fertilizer-arrow" class="text-gray-600">▼</span>
+                        </button>
+                        <div id="fertilizer-dropdown" class="hidden mt-2 ml-4 space-y-2">
+                            <label class="block">
+                                <input 
+                                    type="checkbox" 
+                                    name="filter[]" 
+                                    value="fertilizer" 
+                                    class="mr-2" 
+                                   >
+                                Fertilizer
+                            </label>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Apply Button -->
+                <button 
+                    type="submit" 
+                    class="px-4 py-2 mt-4 text-white rounded bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-400 hover:to-blue-400">
+                    Apply Filters
+                </button>
+            </form>
+        </aside>
+    
+        <!-- Product Grid -->
+        <div class="w-full p-4 bg-white rounded-lg shadow-md md:w-4/3">
+            <h2 class="mb-4 text-2xl font-bold">Products</h2>
+            <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
+                <a href="{{ route('shop.product.show', $product->id) }}" class="transition-transform bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl hover:scale-105">
+                    <!-- Image Section -->
+                    <div class="relative w-full h-48 overflow-hidden rounded-t-lg">
+                        <!-- Ensure the image fills the container without stretching -->
+                        <img src="panel/image/pexels-quintingellar-696205.jpg" alt="{{ $product->name }}" class="object-cover w-full h-full">
+                    </div>
+            
+                    <!-- Product Info Section -->
+                    <div class="p-3">
+                        <h3 class="text-base font-semibold text-gray-800 truncate">Carrot</h3>
+                        <p class="text-sm text-gray-600">Human</p>
+                        <p class="mt-2 font-bold text-green-600">Rs.4000</p>
+                    </div>
+            
+                    <!-- Add to Cart Icon with Normal Button Color -->
+                    <form action="{{ route('shop.addToCart', $product->id) }}" method="POST">
+                    
+                        <button type="submit" class="flex items-center justify-center w-full py-2 text-gray-800 transition duration-200 bg-gray-200 rounded-md hover:bg-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18M4 7h16l-1.6 9.6a4 4 0 01-3.9 3.4H6.5a4 4 0 01-3.9-3.4L4 7zm4.8 5h8.4" />
+                            </svg>
+                            Add to Cart
+                        </button>
+                    </form>
+                </a>
+                <a href="{{ route('shop.product.show', $product->id) }}" class="transition-transform bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl hover:scale-105">
+                    <!-- Image Section -->
+                    <div class="relative w-full h-48 overflow-hidden rounded-t-lg">
+                        <!-- Ensure the image fills the container without stretching -->
+                        <img src="panel/image/pexels-quintingellar-696205.jpg" alt="{{ $product->name }}" class="object-cover w-full h-full">
+                    </div>
+            
+                    <!-- Product Info Section -->
+                    <div class="p-3">
+                        <h3 class="text-base font-semibold text-gray-800 truncate">Carrot</h3>
+                        <p class="text-sm text-gray-600">Human</p>
+                        <p class="mt-2 font-bold text-green-600">Rs.4000</p>
+                    </div>
+            
+                    <!-- Add to Cart Icon with Normal Button Color -->
+                    <form action="{{ route('shop.addToCart', $product->id) }}" method="POST">
+                    
+                        <button type="submit" class="flex items-center justify-center w-full py-2 text-gray-800 transition duration-200 bg-gray-200 rounded-md hover:bg-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18M4 7h16l-1.6 9.6a4 4 0 01-3.9 3.4H6.5a4 4 0 01-3.9-3.4L4 7zm4.8 5h8.4" />
+                            </svg>
+                            Add to Cart
+                        </button>
+                    </form>
+                </a>
+                <a href="{{ route('shop.product.show', $product->id) }}" class="transition-transform bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl hover:scale-105">
+                    <!-- Image Section -->
+                    <div class="relative w-full h-48 overflow-hidden rounded-t-lg">
+                        <!-- Ensure the image fills the container without stretching -->
+                        <img src="panel/image/pexels-quintingellar-696205.jpg" alt="{{ $product->name }}" class="object-cover w-full h-full">
+                    </div>
+            
+                    <!-- Product Info Section -->
+                    <div class="p-3">
+                        <h3 class="text-base font-semibold text-gray-800 truncate">Carrot</h3>
+                        <p class="text-sm text-gray-600">Human</p>
+                        <p class="mt-2 font-bold text-green-600">Rs.4000</p>
+                    </div>
+            
+                    <!-- Add to Cart Icon with Normal Button Color -->
+                    <form action="{{ route('shop.addToCart', $product->id) }}" method="POST">
+                    
+                        <button type="submit" class="flex items-center justify-center w-full py-2 text-gray-800 transition duration-200 bg-gray-200 rounded-md hover:bg-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18M4 7h16l-1.6 9.6a4 4 0 01-3.9 3.4H6.5a4 4 0 01-3.9-3.4L4 7zm4.8 5h8.4" />
+                            </svg>
+                            Add to Cart
+                        </button>
+                    </form>
+                </a>     
+            </div>
+            
+            <!-- Pagination Links -->
+            <div class="mt-4">
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Section -->
+        <!-- Footer Section -->
+     <!-- Footer -->
+ <footer class="py-10 text-gray-300 bg-gray-700 rounded-t-3xl">
+    <div class="container flex flex-col justify-between px-4 mx-auto md:flex-row md:px-10">
+        <!-- Social Media Section -->
+        <div class="mb-8 md:mb-0">
+            <h3 class="mb-4 text-lg font-semibold text-white">SOCIAL MEDIA</h3>
+            <ul>
+                <li class="flex items-center mb-2">
+                    <i class="mr-2 text-white fab fa-facebook"></i>
+                    <a href="#" class="hover:text-white">Foot Cycle</a>
+                </li>
+                <li class="flex items-center mb-2">
+                    <i class="mr-2 text-white fab fa-whatsapp"></i>
+                    <a href="tel:+9476453400" class="hover:text-white">+94 76453400</a>
+                </li>
+                <li class="flex items-center mb-2">
+                    <i class="mr-2 text-white fab fa-instagram"></i>
+                    <a href="#" class="hover:text-white">Foot_Cycle</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Links Section -->
+        <div class="mb-8 md:mb-0">
+            <h3 class="mb-4 text-lg font-semibold text-white">LINKS</h3>
+            <ul>
+                <li><a href="#" class="hover:text-white">Home</a></li>
+                <li><a href="#" class="hover:text-white">Shop</a></li>
+                <li><a href="#" class="hover:text-white">Donation</a></li>
+                <li><a href="#" class="hover:text-white">Seller</a></li>
+            </ul>
+        </div>
+
+        <!-- Services Section -->
+        <div class="mb-8 md:mb-0">
+            <h3 class="mb-4 text-lg font-semibold text-white">SERVICES</h3>
+            <ul>
+                <li><a href="#" class="hover:text-white">Storage</a></li>
+                <li><a href="#" class="hover:text-white">Delivery</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div class="w-full md:w-1/3">
+            <form class="flex flex-col">
+                <input type="email" placeholder="Email Address" class="p-2 mb-4 text-gray-700 placeholder-gray-600 bg-gray-300 rounded">
+                <textarea placeholder="Message" class="p-2 mb-4 text-gray-700 placeholder-gray-600 bg-gray-300 rounded"></textarea>
+                <button class="self-end py-2 text-white bg-green-500 rounded w-36 hover:bg-green-600">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Bottom Text -->
+    <div class="pt-4 mt-10 text-center text-gray-500 border-t-2 border-white">
+        © 2024, Food Cycle
+    </div>
+</footer>
+
+    <!-- Custom JavaScript -->
+    <script src="panel/js/script.js"></script>
+    
+</body>
+</html>
